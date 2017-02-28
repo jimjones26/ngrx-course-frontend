@@ -8,6 +8,7 @@ import { UserSelectionComponent } from './user-selection/user-selection.componen
 import { ThreadSectionComponent } from './thread-section/thread-section.component';
 import { MessageSectionComponent } from './message-section/message-section.component';
 import { ThreadListComponent } from './thread-list/thread-list.component';
+import { MessageListComponent } from './message-list/message-list.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ThreadListComponent } from './thread-list/thread-list.component';
     UserSelectionComponent,
     ThreadSectionComponent,
     MessageSectionComponent,
-    ThreadListComponent
+    ThreadListComponent,
+    MessageListComponent
   ],
   imports: [
     BrowserModule,
