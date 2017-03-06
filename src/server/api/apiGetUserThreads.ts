@@ -3,7 +3,7 @@ import { findDbThreadsPerUser } from '../persistence/findDbThreadsPerUser';
 import { dbMessages, dbParticipants } from '../db-data';
 import * as _ from 'lodash';
 import { Message } from '../../../_shared/model/message';
-import { AllUserData } from "../../../_shared/transfer-objects/all-user-data";
+import { AllUserData } from '../../../_shared/transfer-objects/all-user-data';
 
 // gets all threads for a specific user
 // gets all messages for each thread
@@ -18,8 +18,8 @@ export function apiGetUserThreads(app: Application) {
 
     threadsPerUser.forEach(thread => {
       const threadMessages: Message[] = _.filter(dbMessages, (message: any) => message.threadId = thread.id);
-      messages.concat(threadMessages);
-      participantIds.concat(_.keys(thread.participants));
+      messages = messages.concat(threadMessages);
+      participantIds = participantIds.concat(_.keys(thread.participants));
     });
 
     const participants = _.uniq(participantIds.map(participantId => dbParticipants[participantId]));
