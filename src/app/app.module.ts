@@ -12,6 +12,7 @@ import { ThreadListComponent } from './thread-list/thread-list.component';
 import { MessageListComponent } from './message-list/message-list.component';
 
 import { ThreadsService } from './_services/threads.service';
+import { INITIAL_APPLICATION_STATE } from './_store/application-state';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { ThreadsService } from './_services/threads.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    StoreModule.provideStore({})
+    StoreModule.provideStore({}, INITIAL_APPLICATION_STATE)
   ],
   providers: [ThreadsService],
   bootstrap: [AppComponent]
