@@ -1,4 +1,5 @@
 <div>
-  <span>User: {{userName$ | async}}</span>
-  <span>Unread Messages: </span>
+  <span>User: {{ userName$ | async }}</span>
+  <span>Unread Messages: {{ unreadMessagesCounter$ | async }}</span>
+  <app-thread-list [threads]="threadSummaries$ | async"></app-thread-list>
 </div>
