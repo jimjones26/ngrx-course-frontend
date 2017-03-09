@@ -4,11 +4,10 @@ import { Store } from '@ngrx/store';
 import { ApplicationState } from '../_store/application-state';
 import { LoadUserThreadsAction } from '../_store/actions';
 import { Observable } from 'rxjs/Rx';
-import { Thread } from '../../../_shared/model/thread';
 import { ThreadSummaryVM } from './thread-summarry.vm';
 import { mapStateToUserName } from './mapStateToUserName';
 import { mapStateToUnreadMessagesCounter } from './mapStateToUnreadMessagesCounter';
-import * as _ from 'lodash';
+import { stateToThreadSummariesSelector } from './stateToThreadSummariesSelector';
 
 @Component({
   selector: 'app-thread-section',
@@ -31,22 +30,7 @@ export class ThreadSectionComponent implements OnInit {
       .skip(1)
       .map(mapStateToUnreadMessagesCounter);
 
-    this.threadSummaries$ = store.select(state => {
-      const threads = _.values<Thread>(state.storeData.threads);
-      return threads.map(thread => {
-
-        const names = _.keys(thread.participants).map(participantId => state.storeData.participants[participantId].name);
-        const lastMessageId = _.last(thread.messageIds),
-              lastMessage = state.storeData.messages[lastMessageId];
-
-        return {
-          id: thread.id,
-          participantNames: _.join(names, ','),
-          // lastMessageText: lastMessage.text,
-          // timestamp: lastMessage.timestamp
-        };
-      });
-    });
+    this.threadSummaries$ = store.select(stateToThreadSummariesSelector);
   }
 
   ngOnInit() {
